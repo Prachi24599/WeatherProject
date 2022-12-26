@@ -4,7 +4,12 @@ const https = require("https");
 const app = express();
 
 app.get("/", function(req, res){
-    const url = "https://api.openweathermap.org/data/2.5/weather?appid=03fe1538c61eb075c2b0eaa4404056ad&q=landon&units=metric";
+
+    const query = "london";
+    const apiKey = "03fe1538c61eb075c2b0eaa4404056ad";
+    const unit = "metric"
+    const url = "https://api.openweathermap.org/data/2.5/weather?appid="+ apiKey +"&q=" + query + "&units="+ unit ;
+    
     https.get(url, function(response){
         console.log(response.statusCode);
         //console.log(response.headers);
@@ -18,7 +23,7 @@ app.get("/", function(req, res){
             const iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
 
             res.write("<p>The weather is currently " + desc + "</p>");
-            res.write("<h1>Tempture in Landon is " + temp + " degrees celcius</h1>");
+            res.write("<h1>Tempture in London is " + temp + " degrees celcius</h1>");
             res.write("<img src = " + iconURL +" >");
             res.send();
         });
